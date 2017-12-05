@@ -26,9 +26,9 @@ public class Class1 {
         //driver.findElement(By.xpath("(//img[@alt='photo'])[1]")).click();
 //        driver.findElement(By.xpath("(//img[@alt='photo'])[2]")).click();
 //        driver.findElement(By.xpath("(//img[@alt='photo'])[3]")).click();
-        driver.findElement(By.linkText("Ольга Симчак\n            \n            \n              тренер, PSPO, PSM")).click();
+        driver.findElement(By.partialLinkText ("Ольга Симчак")).click();
         driver.navigate().back();
-        driver.findElement(By.linkText("Анастасия Педоренко\n            \n            \n              тренер, PSPO")).click();
+        driver.findElement(By.partialLinkText ("Анастасия Педоренко")).click();
         driver.navigate().back();
 
     }
