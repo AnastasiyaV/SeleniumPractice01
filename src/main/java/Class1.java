@@ -30,9 +30,9 @@ public class Class1 extends WebDriverSettings {
         return tutorPosition;
 
     }
-    @Test
-        public String getPosition("Анастасия Педоренко") {
-    }
+//    @Test
+//        public String getPosition("Анастасия Педоренко") {
+//    }
 
 //    private boolean isElementPresent(By by) {
 //        try {
