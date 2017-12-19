@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Class1 extends WebDriverSettings {
-    private By memberLocator  =  By.className("member");
-    private By tutorNameLocator  =  By.className("name");
-    private By tutorPositionLocator  =  By.className("position");
+    private By memberLocator = By.className("member");
+    private By tutorNameLocator = By.className("name");
+    private By tutorPositionLocator = By.className("position");
 
     @Test
     public void createListTutors() throws Exception {
@@ -17,22 +17,24 @@ public class Class1 extends WebDriverSettings {
         for (WebElement currentMember : listMemberWebElements) {
             String tutorName = currentMember.findElement(tutorNameLocator).getText();
             String tutorPosition = currentMember.findElement(tutorPositionLocator).getText();
-            Tutor  tutor = new Tutor(tutorName, tutorPosition);
+            Tutor tutor = new Tutor(tutorName, tutorPosition);
             System.out.println(tutor.toString());
             listTutors.add(tutor);
         }
-        System.out.println("listTutors size is "+listTutors.size());
+        System.out.println("listTutors size is " + listTutors.size());
     }
-    private String getPosition (String tutorName) {
-        String tutorPosition=null;
-        
+
+    private String getPosition(String tutorName) {
+        String tutorPosition = null;
+
 
         return tutorPosition;
 
     }
-    @Test
-        public String getPosition("Анастасия Педоренко") {
-    }
+}
+    //@Test
+//        public String getPosition("Анастасия Педоренко") {
+//    }
 
 //    private boolean isElementPresent(By by) {
 //        try {
@@ -50,4 +52,5 @@ public class Class1 extends WebDriverSettings {
 //            return false;
 //        }
 //    }
-}
+//}
+//
