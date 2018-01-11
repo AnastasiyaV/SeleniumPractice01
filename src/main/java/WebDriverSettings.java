@@ -28,7 +28,7 @@ public class WebDriverSettings {
         baseUrl = "http://skillsup.ua/"; //?or .navigate().to("http://skillsup.ua/"); ??or .get
         driver.manage().timeouts().implicitlyWait(DriverConfig.WAIT_SEC, TimeUnit.SECONDS);
     }
-    
+
     @After
     public void tearDown() throws Exception {
         driver.quit();
