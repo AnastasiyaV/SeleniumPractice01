@@ -2,7 +2,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DriverConfig {
-    public static final int WAIT_SEC = 30;
+    public static final int WAIT_SEC = 10;
 
 
 
