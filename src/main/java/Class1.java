@@ -27,6 +27,8 @@ public class Class1 extends WebDriverSettings {
         System.out.println("listTutors size is " + listTutors.size());
 
         String pos = getPosition("fdfdsf");
+        //accert din test
+        //to read about Java8 class Optional
         if (pos != null) {
             //magic logic code is here :)
         } else {
