@@ -7,6 +7,12 @@
     <groupId>SeleniumPractice01</groupId>
     <artifactId>SeleniumPractice01</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <properties>
+        <jbehaive.core.version>4.1.1</jbehaive.core.version>
+        <jbehaive.site.version>3.3</jbehaive.site.version>
+        <embeddables>**/*stories.java</embeddables>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>//for understanding kyrilic
+    </properties>
     <dependencies>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
@@ -18,6 +24,91 @@
             <artifactId>junit</artifactId>
             <version>RELEASE</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.jbehave</groupId>
+            <artifactId>jbehave-core</artifactId>
+            <version>4.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jbehave</groupId>
+            <artifactId>jbehave-core</artifactId>
+            <version>4.1.1</version>
+            <classifier>resources </classifier>
+            <type>zip</type>
+        </dependency>
+        <dependency>
+            <groupId>org.jbehave.site</groupId>
+            <artifactId>jbehave-site-resources</artifactId>
+            <version>3.3</version>
+            <type> zip </type>
+        </dependency>
     </dependencies>
+
+    <build>
+    <resources>
+        <resource>
+            <directory>src/main/java</directory>
+            <filtering>true</filtering>
+            <excludes>
+                <exclude>**/*.java</exclude>
+            </excludes>
+        </resource>
+        <resource>
+            <directory>src/main/resources</directory>
+            <filtering>true</filtering>
+        </resource>
+    </resources>
+    <pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </pluginManagement>
+    <plugins>
+    <plugin>
+    <groupId>org.jbehave</groupId>
+    <artifactId>jbehave-maven-plugin</artifactId>
+    <version>4.1.1</version>
+    <executions>
+    <execution>
+        <id>unpack-view-resources</id>
+        <phase>process-resources</phase>
+        <goals>
+            <goal>unpack-view-resources</goal>
+        </goals>
+    </execution>
+    <execution>
+    <id>embeddable-stories</id>
+    <phase>integration-test</phase>
+    <configuration>
+    <includes>
+        <include>${embeddables}</include>
+    </includes>
+    <excludes />
+    <ignoreFailureInStories>true</ignoreFailureInStories>
+    <ignoreFailureInView>false</ignoreFailureInView>
+        <ignoreFailureInStories>true</ignoreFailureInStories>
+        <ignoreFailureInView>false</ignoreFailureInView>
+        <threads>1</threads>
+        <metaFilters>
+            <metaFilter></metaFilter>
+        </metaFilters>
+    </configuration>
+        <goals>
+            <goal>run-stories-as-embeddables</goal>
+        </goals>
+    </execution>
+    </executions>
+    </plugin>
+    </plugins>
+    </build>
 
 </project>
