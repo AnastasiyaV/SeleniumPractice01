@@ -11,7 +11,7 @@
         <jbehaive.core.version>4.1.1</jbehaive.core.version>
         <jbehaive.site.version>3.3</jbehaive.site.version>
         <embeddables>**/*stories.java</embeddables>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>//for understanding kyrilic
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
         <dependency>

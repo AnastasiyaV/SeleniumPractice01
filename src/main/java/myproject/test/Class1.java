@@ -1,6 +1,10 @@
+package myproject.test;
+
+import myproject.WebDriverSettings;
+import myproject.domain.Tutor;
 import org.junit.*;
 import org.openqa.selenium.*;
-import org.openqa.selenium.support.ui.WebDriverWait;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +31,7 @@ public class Class1 extends WebDriverSettings {
         System.out.println("listTutors size is " + listTutors.size());
 
         String pos = getPosition("fdfdsf");
-        //accert din test
+        //accert din myproject.test
         //to read about Java8 class Optional
         if (pos != null) {
             //magic logic code is here :)
