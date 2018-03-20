@@ -2,12 +2,10 @@ package myproject.page;
 
 import myproject.domain.Tutor;
 import org.junit.Assert;
-import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -34,28 +32,17 @@ public class TutorPage extends BasePage {
         return member.findElement(tutorPositionLocator).getText();
     }
 
-    @Test
-    public void locateAnastasiyaInfo() {
-        String expectedTutorName = "Анастасия Педоренко";
-        assertIsTutorLocated(expectedTutorName);
-    }
 
 
-    @Test
-    public void locateFailInfo() {
-        String expectedTutorName = "Fail";
-        assertIsTutorLocated(expectedTutorName);
-    }
 
-
-    public void openPage(String site) {
+    public void openPage() {
         driver.get(site);
         //myproject.driver.get(baseUrl + "/about/our-team/");
         //TODO waitUntil myproject.page is loaded
     }
 
     //3. check if there is a Tutor with exact name and position
-    private Tutor assertIsTutorLocated(String expectedTutorName) {
+    private Tutor getTutor(String expectedTutorName) {
         List<WebElement> listMemberWebElements = getMembers();
         for (WebElement currentMember : listMemberWebElements) {
             String tutorName = getMemberName(currentMember);
@@ -65,17 +52,17 @@ public class TutorPage extends BasePage {
                 return new Tutor(tutorName, tutorPosition);
             }
         }
-        Assert.fail("tutor with name " + expectedTutorName + " was not found");
+
+        Assert.fail(String.format("tutor with name %s was not found",expectedTutorName));
         return null;
 
     }
 
     public String getPosition(String tutorName) {
-        Tutor tutor = assertIsTutorLocated(tutorName);
-        if(tutor == null){
-            throw new NoSuchElementException(tutorName + " was not found on the myproject.page.");
-        }else {
-            return tutor.position;
-        }
+        Tutor tutor = getTutor(tutorName);
+        return tutor.position;
+    }
+    public int getPositionLength(String tutorName) {
+        return getPosition(tutorName).length();
     }
 }

@@ -14,16 +14,10 @@ public class WebDriverSettings {
     private boolean acceptNextAlert = true;//?
     public WebDriver driver;
     public String baseUrl;
-    private List <String> testErrorList= new ArrayList <String> ();
-
-    public void gatherError (String errorDescription){
-      testErrorList.add(errorDescription);
-    }
 
     @Before
-        public void setUp() throws Exception {
-        testErrorList.clear();
-        System.setProperty("webdriver.chrome.myproject.driver", "C:\\Users\\admin\\Downloads\\chromedriver_win32\\chromedriver.exe");
+    public void setUp() throws Exception {
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\admin\\Downloads\\chromedriver_win32\\chromedriver.exe");
         driver = new ChromeDriver();
         baseUrl = "http://skillsup.ua/"; //?or .navigate().to("http://skillsup.ua/"); .get - напрямую
         driver.manage().timeouts().implicitlyWait(DriverConfig.WAIT_SEC, TimeUnit.SECONDS);
@@ -32,10 +26,5 @@ public class WebDriverSettings {
     @After
     public void tearDown() throws Exception {
         driver.quit();
-        boolean testIsFailed = !testErrorList.isEmpty();
-        if (testIsFailed){
-            fail(testErrorList.toString());
-        }
-
     }
 }

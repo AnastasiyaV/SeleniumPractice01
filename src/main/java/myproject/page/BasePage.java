@@ -18,7 +18,7 @@ public class BasePage     {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         return js.executeScript(script);
     }
-    String title = (String) jsExecutorWithReturnedObject("return document.title");
+ //   String title = (String) jsExecutorWithReturnedObject("return document.title");
 
     public void jsExecutorWithoutReturningResult (String script) {
         JavascriptExecutor js = (JavascriptExecutor) driver;
