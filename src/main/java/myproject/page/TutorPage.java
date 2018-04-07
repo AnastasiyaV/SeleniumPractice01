@@ -6,8 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 public class TutorPage extends BasePage {
     public TutorPage(WebDriver driver) {
@@ -15,7 +14,6 @@ public class TutorPage extends BasePage {
     }
 
     private String site = "http://skillsup.ua/about/our-team/";
-    //private String baseUrl = "http://skillsup.ua";
     private By memberLocator = By.className("member");
     private By tutorNameLocator = By.className("name");
     private By tutorPositionLocator = By.className("position");
@@ -32,16 +30,12 @@ public class TutorPage extends BasePage {
         return member.findElement(tutorPositionLocator).getText();
     }
 
-
-
-
     public void openPage() {
         driver.get(site);
-        //myproject.driver.get(baseUrl + "/about/our-team/");
         //TODO waitUntil myproject.page is loaded
     }
 
-    //3. check if there is a Tutor with exact name and position
+    //3. check if there is a Tutor with expected name
     private Tutor getTutor(String expectedTutorName) {
         List<WebElement> listMemberWebElements = getMembers();
         for (WebElement currentMember : listMemberWebElements) {
@@ -52,17 +46,67 @@ public class TutorPage extends BasePage {
                 return new Tutor(tutorName, tutorPosition);
             }
         }
-
-        Assert.fail(String.format("tutor with name %s was not found",expectedTutorName));
+        Assert.fail(String.format("tutor with name %s was not found", expectedTutorName));
         return null;
+    }
+
+    //сформировать мапы тренер, PSPO,ISTQB
+    public Map<String, List<Tutor>> buildTutorMapping() {
+        List<WebElement> listMemberWebElements = getMembers();
+        Map<String, List<Tutor>> map = new HashMap<>();
+        List<Tutor> listCoach = new ArrayList<>();
+        List<Tutor> listPSPO = new ArrayList<>();
+        List<Tutor> listISTQB = new ArrayList<>();
+
+        for (WebElement currentMember : listMemberWebElements) {
+            String tutorName = getMemberName(currentMember);
+            String tutorPosition = getMemberPosition(currentMember);
+
+            if (tutorPosition.contains("тренер")) {
+                listCoach.add(new Tutor(tutorName, tutorPosition));
+            }
+            if (tutorPosition.contains("PSPO")) {
+                listPSPO.add(new Tutor(tutorName, tutorPosition));
+            }
+            if (tutorPosition.contains("ISTQB")) {
+                listISTQB.add(new Tutor(tutorName, tutorPosition));
+            }
+
+        }
+
+        map.put("тренер", listCoach);
+        map.put("PSPO", listPSPO);
+        map.put("ISTQB", listISTQB);
+        System.out.println(map);
+        return map;
 
     }
 
-    public String getPosition(String tutorName) {
-        Tutor tutor = getTutor(tutorName);
-        return tutor.position;
+
+
+        //добавить метод isTutor (позиция содержит слово тренер)
+        public boolean IsTutor (String tutorName){
+            String tutorPosition = getTutor(tutorName).getPosition();
+            return (tutorPosition.contains("coach") || tutorPosition.contains("тренер"));
+
+        }
+
+        public String getPosition (String tutorName){
+            Tutor tutor = getTutor(tutorName);
+            return tutor.getPosition();
+        }
+
+        public int getPositionLength (String tutorName){
+            return getPosition(tutorName).length();
+        }
+
+        public String getName (String tutorName){
+            Tutor tutor = getTutor(tutorName);
+            return tutor.getName();
+        }
+
+        public int getNameLength (String tutorName){
+            return getName(tutorName).length();
+        }
+
     }
-    public int getPositionLength(String tutorName) {
-        return getPosition(tutorName).length();
-    }
-}

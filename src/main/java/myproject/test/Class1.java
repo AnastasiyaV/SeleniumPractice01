@@ -44,8 +44,8 @@ public class Class1 extends WebDriverSettings {
     private String getPosition(String tutorName) {
         String tutorPosition = null;
         for (Tutor tutor : listTutors) {
-            if (tutor.name.equals(tutorName)) {
-                tutorPosition = tutor.position;
+            if (tutor.getName().equals(tutorName)) {
+                tutorPosition = tutor.getPosition();
                 break;
             }
         }
